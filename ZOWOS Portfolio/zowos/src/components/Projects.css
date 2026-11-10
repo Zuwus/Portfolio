@@ -1,0 +1,186 @@
+/* ========== Section shell ========== */
+.projects { padding: clamp(5rem, 10vw, 8rem) 0; }
+
+.projects__header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.projects__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.projects__subtitle {
+  max-width: 46ch;
+  margin-top: 1.25rem;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+.projects__list { display: grid; gap: 1.5rem; }
+.projects__secondary { display: grid; gap: 1.5rem; }
+@media (min-width: 768px) {
+  .projects__secondary { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ========== Shared project panel ========== */
+.project {
+  position: relative;
+  background: linear-gradient(160deg, rgba(167, 139, 250, 0.06), transparent 45%), var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.project:hover { border-color: var(--border-strong); }
+
+/* ========== Featured layout: text left, screenshots right ========== */
+.project--featured {
+  display: grid;
+  gap: 2rem;
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+}
+/* Soft purple glow tucked into the corner */
+.project--featured::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 60%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(113, 55, 200, 0.22), transparent 65%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.project--featured > * { position: relative; }
+@media (min-width: 900px) {
+  .project--featured { grid-template-columns: 5fr 7fr; gap: 3rem; align-items: center; }
+}
+
+/* ========== Card layout: screenshot on top, details below ========== */
+.project--card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+.project--card:hover { transform: translateY(-3px); }
+
+/* ========== Details (text side) ========== */
+.project__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+}
+.project__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-bottom: 1.1rem; }
+.project__label { font-size: 0.9rem; font-weight: 500; color: var(--lavender); }
+
+.project__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.8rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--lavender);
+}
+/* Hollow dot = still being built. Filled dot = finished. (Text always says which.) */
+.project__status::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+}
+.project__status[data-tone='completed'] { color: var(--highlight); }
+.project__status[data-tone='completed']::before { background: currentColor; }
+
+.project__name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+.project--featured .project__name { font-size: clamp(2.4rem, 5vw, 3.6rem); }
+.project--card .project__name { font-size: clamp(1.6rem, 3vw, 1.9rem); }
+
+.project__description { max-width: 50ch; margin-top: 1rem; color: var(--text-muted); }
+.project__note {
+  max-width: 50ch;
+  margin-top: 0.75rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--purple);
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.project__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.project__tags li {
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgba(167, 139, 250, 0.06);
+  font-size: 0.88rem;
+  color: var(--highlight);
+}
+
+/* margin-top: auto pushes links to the bottom so card buttons line up */
+.project__links { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: auto; padding-top: 1.75rem; }
+.project__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.project__link:hover { background: rgba(167, 139, 250, 0.12); border-color: var(--lavender); }
+.project__link--primary { background: var(--purple); border-color: transparent; color: #fff; }
+.project__link--primary:hover { background: #8546e0; border-color: transparent; }
+
+/* ========== Screenshots and placeholders ========== */
+.project__shots { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.project__shots .project__shot { aspect-ratio: 4 / 3; }
+.project__shots .project__shot--main { aspect-ratio: 16 / 10; grid-column: 1 / -1; }
+
+.project__shot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+}
+
+/* Dashed border + diagonal stripes make placeholders obviously not real screenshots */
+.project__shot--placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1rem;
+  border-style: dashed;
+  background:
+    repeating-linear-gradient(45deg, rgba(167, 139, 250, 0.05) 0 10px, transparent 10px 20px),
+    rgba(11, 10, 16, 0.55);
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.project__shots .project__shot--placeholder { font-size: 0.8rem; }
+.project__placeholder-tag {
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--lavender);
+}

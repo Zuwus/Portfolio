@@ -1,0 +1,146 @@
+/* ========== Section shell ========== */
+.contact {
+  position: relative;
+  padding: clamp(5rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
+  overflow: hidden;
+}
+/* Soft glow, centred low so the page ends in light (About: left, Skills: right) */
+.contact::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -30%;
+  width: 70%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(113, 55, 200, 0.2), transparent 65%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.contact__inner { position: relative; }
+
+/* ========== Panel: same surface language as the Projects panels ========== */
+.contact__panel {
+  position: relative;
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  background: linear-gradient(160deg, rgba(167, 139, 250, 0.06), transparent 45%), var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+/* Faint grid, echoing the hero, fading toward the lower left */
+.contact__panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(167, 139, 250, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse at 85% 10%, #000 0%, transparent 65%);
+  mask-image: radial-gradient(ellipse at 85% 10%, #000 0%, transparent 65%);
+  pointer-events: none;
+}
+/* Purple glow tucked into the top corner */
+.contact__panel::after {
+  content: '';
+  position: absolute;
+  top: -35%;
+  right: -10%;
+  width: 55%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(113, 55, 200, 0.24), transparent 65%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.contact__panel > * { position: relative; z-index: 1; }
+
+@media (min-width: 900px) {
+  .contact__panel { grid-template-columns: 7fr 5fr; gap: 4rem; align-items: center; }
+}
+
+/* ========== Intro (left) ========== */
+.contact__intro { display: flex; flex-direction: column; align-items: flex-start; }
+
+.contact__label { font-size: 0.9rem; font-weight: 500; color: var(--lavender); margin-bottom: 1.1rem; }
+
+.contact__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+/* Same gradient treatment as the hero role line */
+.contact__accent {
+  background: linear-gradient(90deg, var(--highlight), var(--lavender) 55%, #9a6df0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.contact__text {
+  max-width: 46ch;
+  margin: 1.5rem 0 2.25rem;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+}
+
+/* ========== Channels (right) ========== */
+.contact__channels { display: grid; gap: 0.75rem; }
+
+.contact__channel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  background: rgba(11, 10, 16, 0.55);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+a.contact__channel:hover {
+  background: rgba(167, 139, 250, 0.1);
+  border-color: var(--lavender);
+  transform: translateY(-2px);
+}
+
+.contact__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: rgba(167, 139, 250, 0.08);
+  color: var(--lavender);
+}
+
+.contact__channel-text { display: grid; min-width: 0; flex: 1; }
+.contact__channel-label { font-size: 0.85rem; color: var(--text-muted); }
+.contact__channel-value {
+  font-weight: 500;
+  color: var(--text);
+  overflow-wrap: break-word; /* last-resort safety so nothing forces sideways scroll */
+}
+
+.contact__arrow { flex: none; color: var(--lavender); transition: transform 0.2s ease; }
+a.contact__channel:hover .contact__arrow { transform: translate(2px, -2px); }
+
+/* Small phones: tighter rows so the text gets enough room */
+@media (max-width: 479px) {
+  .contact__panel { padding: 1.25rem; }
+  .contact__channel { gap: 0.75rem; padding: 0.85rem 0.9rem; }
+  .contact__icon { width: 38px; height: 38px; }
+  .contact__channel-value { font-size: 0.95rem; }
+}
+
+/* LinkedIn placeholder: clearly not a link (dashed, muted, no hover) */
+.contact__channel--soon { border-style: dashed; }
+.contact__channel--soon .contact__icon { color: var(--text-muted); }
+.contact__channel--soon .contact__channel-value { color: var(--text-muted); }

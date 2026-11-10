@@ -1,0 +1,92 @@
+/* ========== Design tokens (from the blueprint) ========== */
+:root {
+  --bg: #0B0A10;
+  --surface: #191522;
+  --purple: #7137C8;
+  --lavender: #A78BFA;
+  --highlight: #E5D9FF;
+  --text: #F4F0FA;
+
+  --text-muted: rgba(244, 240, 250, 0.72);
+  --border: rgba(167, 139, 250, 0.14);
+  --border-strong: rgba(167, 139, 250, 0.28);
+
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --nav-height: 72px;
+}
+
+/* ========== Reset + base ========== */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+/* Anchor links stop below the fixed navbar instead of under it */
+section[id] { scroll-margin-top: var(--nav-height); }
+
+:focus-visible {
+  outline: 2px solid var(--lavender);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ========== Shared utilities ========== */
+.container { width: min(100% - 2.5rem, 1200px); margin-inline: auto; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.95rem 1.75rem;
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--purple), #8f5ae8);
+  box-shadow: 0 10px 30px -8px rgba(113, 55, 200, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 16px 36px -8px rgba(113, 55, 200, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 200;
+  padding: 0.6rem 1rem;
+  background: var(--lavender);
+  color: var(--bg);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+}
+.skip-link:focus { top: 1rem; }
+
+/* TEMPORARY placeholder sections (removed as real sections arrive) */
+.placeholder { padding: 6rem 0; border-top: 1px solid var(--border); }
+.placeholder h2 { font-family: var(--font-heading); font-size: 2rem; }
+.placeholder p { color: var(--text-muted); margin-top: 0.5rem; }
+
+/* Respect people who turn animations off in their OS settings */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,95 @@
+/* ========== Section shell ========== */
+.about {
+  position: relative;
+  padding: clamp(5rem, 10vw, 8rem) 0;
+  overflow: hidden;
+}
+/* One soft purple glow at the left edge: the only decoration in this section */
+.about::before {
+  content: '';
+  position: absolute;
+  left: -20%;
+  top: 10%;
+  width: 60%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(113, 55, 200, 0.22), transparent 65%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.about__inner {
+  position: relative;
+  display: grid;
+  gap: 3rem;
+}
+
+/* ========== Layout: stacked on mobile, two columns on desktop ========== */
+@media (min-width: 900px) {
+  .about__inner { grid-template-columns: 5fr 7fr; gap: 5rem; align-items: start; }
+  /* Heading stays in view while the longer right column scrolls past */
+  .about__header {
+    position: sticky;
+    top: calc(var(--nav-height) + 2rem);
+  }
+}
+
+/* ========== Heading column ========== */
+.about__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+/* The shared Wordmark has its own fixed size; here it should match the heading */
+.about__title .wordmark { font-size: inherit; }
+
+.about__tagline {
+  margin-top: 1.25rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--purple);
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 500;
+  color: var(--lavender);
+}
+
+/* ========== Story column ========== */
+.about__body { display: flex; flex-direction: column; gap: 1.25rem; }
+.about__body > p { max-width: 58ch; color: var(--text-muted); }
+.about__body > .about__lead {
+  max-width: 34ch;
+  margin-bottom: 0.5rem;
+  font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+/* ========== Profile details (description list) ========== */
+.about__details {
+  margin: 1.5rem 0 0;
+  border-top: 1px solid var(--border);
+}
+.about__detail {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.about__detail dt { font-size: 0.95rem; color: var(--text-muted); }
+.about__detail dd { margin: 0; font-weight: 500; color: var(--text); }
+@media (min-width: 640px) {
+  .about__detail { grid-template-columns: 1fr 2fr; gap: 1.5rem; align-items: baseline; }
+}
+
+.about__tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.about__tags li {
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgba(167, 139, 250, 0.08);
+  font-size: 0.9rem;
+  color: var(--highlight);
+}

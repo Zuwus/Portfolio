@@ -1,0 +1,81 @@
+.navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.navbar--scrolled {
+  background: rgba(11, 10, 16, 0.72);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  border-bottom-color: var(--border);
+}
+.navbar__inner { display: flex; align-items: center; justify-content: space-between; }
+.navbar__brand { display: inline-flex; }
+
+.navbar__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+/* Mobile: links become a dropdown glass panel, hidden until opened */
+.navbar__links {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: calc(var(--nav-height) - 6px);
+  left: 1.25rem;
+  right: 1.25rem;
+  padding: 0.5rem;
+  background: rgba(25, 21, 34, 0.94);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  animation: menu-in 0.2s ease-out;
+}
+.navbar__links--open { display: flex; }
+.navbar__links a {
+  display: block;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.navbar__links a:hover { color: var(--text); background: rgba(167, 139, 250, 0.12); }
+
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Desktop: inline row of links, no toggle button */
+@media (min-width: 768px) {
+  .navbar__toggle { display: none; }
+  .navbar__links {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    gap: 0.25rem;
+    padding: 0;
+    background: none;
+    border: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    animation: none;
+  }
+  .navbar__links a { padding: 0.5rem 0.95rem; font-size: 0.95rem; }
+}

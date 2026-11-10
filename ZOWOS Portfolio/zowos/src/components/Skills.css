@@ -1,0 +1,99 @@
+/* ========== Section shell ========== */
+.skills {
+  position: relative;
+  padding: clamp(5rem, 10vw, 8rem) 0;
+  overflow: hidden;
+}
+/* Soft glow on the right edge (About's glow is on the left) */
+.skills::before {
+  content: '';
+  position: absolute;
+  right: -25%;
+  top: 5%;
+  width: 55%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(113, 55, 200, 0.16), transparent 65%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.skills__inner { position: relative; }
+
+/* ========== Heading ========== */
+.skills__header { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.skills__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.skills__subtitle {
+  max-width: 46ch;
+  margin-top: 1.25rem;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+/* ========== Panel grid: 1 column on mobile, 2x2 on desktop ========== */
+.skills__grid {
+  display: grid;
+  gap: 1.25rem;
+}
+@media (min-width: 768px) {
+  .skills__grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+}
+
+.skills__panel {
+  position: relative;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  background: linear-gradient(160deg, rgba(167, 139, 250, 0.06), transparent 45%), var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+}
+.skills__panel:hover { border-color: var(--border-strong); }
+/* A faint highlight line along the top edge of each panel */
+.skills__panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--lavender), transparent);
+  opacity: 0.45;
+}
+
+.skills__category {
+  margin-bottom: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* ========== Tags: skill name + experience level ========== */
+.skills__tags { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+.skills__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: rgba(167, 139, 250, 0.06);
+}
+.skills__name { font-size: 0.95rem; font-weight: 500; color: var(--text); }
+.skills__level {
+  padding-left: 0.65rem;
+  border-left: 1px solid var(--border-strong);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Quiet visual hierarchy by level (the text label always carries the meaning) */
+.skills__tag[data-level='Familiar'] .skills__level { color: var(--lavender); }
+.skills__tag[data-level='Hands-on'] .skills__level { color: var(--highlight); }

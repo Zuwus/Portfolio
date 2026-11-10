@@ -1,0 +1,27 @@
+.footer { border-top: 1px solid var(--border); }
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem 2rem;
+  padding: 2rem 0;
+}
+
+.footer__brand { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1.25rem; }
+.footer__copy { font-size: 0.9rem; color: var(--text-muted); }
+
+.footer__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.95rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+.footer__link:hover { color: var(--text); background: rgba(167, 139, 250, 0.12); border-color: var(--lavender); }
